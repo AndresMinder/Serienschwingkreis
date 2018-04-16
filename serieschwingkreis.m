@@ -1,3 +1,29 @@
+% *************************************************************************
+% Projekt      : Serienschwingkreis
+% Autor        : Nando Spiegel, Andres Minder
+% Dateiname    : serieschwingkreis.m
+% Beginndatum  : 15.04.2018
+% Enddatum     : -
+% Version      : 1.0
+% *************************************************************************
+% Innerhalb dieser Funktion, welche mittels der Matlab-Funktion "guide"
+% erstellt wurde, ist das Hauptfenster für die Werteingabe implementiert.
+% 
+% - Allenfalls das Bild noch ersetzen.
+% *************************************************************************
+% 
+% global variables: -
+% 
+% *************************************************************************
+% 
+% used functions:   -
+% 
+% input files:      RLC_Netzwerk.png
+% 
+% output files:     -
+% 
+% *************************************************************************
+
 function varargout = serieschwingkreis(varargin)
 % SERIESCHWINGKREIS MATLAB code for serieschwingkreis.fig
 %      SERIESCHWINGKREIS, by itself, creates a new SERIESCHWINGKREIS or raises the existing
