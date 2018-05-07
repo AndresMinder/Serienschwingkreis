@@ -17,7 +17,7 @@
 % 
 % *************************************************************************
 % 
-% used functions:   varargout = serieschwingkreis(varargin);
+% used functions:   varargout = hauptmenue(varargin);
 % 
 % input files:      -
 % 
@@ -26,4 +26,5 @@
 % *************************************************************************
 
 % Nur um das Frame vorerst zu öffnen.
-serieschwingkreis();
+% serieschwingkreis();
+hauptmenue();
