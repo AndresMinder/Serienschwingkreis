@@ -1,38 +1,24 @@
 % *************************************************************************
 % Projekt      : Serienschwingkreis
 % Autor        : Nando Spiegel, Andres Minder
-% Dateiname    : Main.m
-% Beginndatum  : 15.04.2018
+% Dateiname    : calculating.m
+% Beginndatum  : 07.05.2018
 % Enddatum     : -
 % Version      : 1.0
 % *************************************************************************
-% Das main.m file dient als Startsequenz des ganzen Projektes 
-% "Serienschwingkreis". Es startet in einer Funktion das Graphical User
-% Interface, in welchem dann vom User selbst Bearbeitungen vorgenommen
-% werden können, wie z.B. das Eintragen von den Werten der passiven
-% Netzwerkelementen und auch der Eingangsspannung u(t).
+% Hier werden alle Werte des Widerstandes berechnet.
 % *************************************************************************
 % 
 % global variables: -
 % 
 % *************************************************************************
 % 
-% used functions:   varargout = hauptmenue(varargin);
+% used functions:   -
 % 
 % input files:      -
 % 
 % output files:     -
 % 
 % *************************************************************************
-
-% Nur um das Frame vorerst zu öffnen.
-% serieschwingkreis();
-% hauptmenue();
-syms t
-u(t) = t^2;
-
-% R = ;
-% L = ;
-% C = ;
 
 
