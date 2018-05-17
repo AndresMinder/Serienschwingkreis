@@ -28,11 +28,6 @@
 % Nur um das Frame vorerst zu öffnen.
 % serieschwingkreis();
 % hauptmenue();
-syms t
-u(t) = t^2;
 
-% R = ;
-% L = ;
-% C = ;
 
 
