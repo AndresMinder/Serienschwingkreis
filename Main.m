@@ -26,8 +26,13 @@
 % *************************************************************************
 
 % Nur um das Frame vorerst zu öffnen.
+<<<<<<< Updated upstream
 % serieschwingkreis();
 % hauptmenue();
 
 
 
+=======
+serieschwingkreis();
+% hauptmenue();
+>>>>>>> Stashed changes
