@@ -5,8 +5,9 @@ syms t ie(t) x
 firstInitialValue = 0;  % Anfangsbedingungen sind = 0!
 secondInitialValue = 0;
 
-ue(t) = 2*t+10e-3+0.1/(20e-6)*int(x,x,0,t);
-% ue(t) = sin(10*t);
+%ue(t) = 2*t+10e-3+0.1/(20e-6)*int(x,x,0,t);
+ue(t) = sym('5');
+%ue(t) = sin(t);
 
 
 R = 20;
