@@ -25,7 +25,8 @@ cond = [ie(0) == firstInitialValue, Die(0) == secondInitialValue];
 ie(t) = dsolve(equ, cond);
 
 figure(2)
-fplot(ie(t));
+fplot(@(t)ie(t), [0,1], 'g')
+%fplot(ie(t));
 grid on;
 title 'ie(t)'
 
