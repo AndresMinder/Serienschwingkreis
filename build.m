@@ -1,56 +1,86 @@
 % Zum Sache probiere:
 clear all; close all; clc
+% =========================================================================
 
-syms t ie(t) x tau
+% Festlegungen
+syms s t tau ue(t) ie(t)
 
-range = [0,1e-2];
-firstInitialValue = 0;  % Anfangsbedingungen sind = 0!
-secondInitialValue = 0;
-
-%ue(t) = 2*t+10e-3+0.1/(20e-6)*int(x,x,0,t);
-ue(t) = sym('5');
-%ue(t) = sin(t);
-
-
+% Vom User zu bestimmende Grössen
+ue(t) = 10;
+range = [0, 0.1];
 R = 20;
 L = 0.1;
 C = 20e-6;
 
-% ue(t) = R*100*t + 100*L + 100/C*int(x,x,0,t);
-ue(t) = sym('5');
+% Berechnungen der Eingangsgrössen
+% Der Eingangsstrom wurde mittels der
+% Laplace-Transformierten der Differentialgleichung der Eingangsmasche.
+% Dabei sind alle Anfangswerte gleich Null gesetzt.
+Ue(s) = laplace(ue);
+Ie(s) = (s*Ue(s)*1/L)/(s^2+R/L*s+1/(C*L));
+ie(t) = ilaplace(Ie);
 
-
+% Plot der Eingangsgrössen
 figure(1)
-fplot(ue(t));
-grid on;
-title 'Ue(t)'
+subplot(2,1,1)
+fplot(ie, range)
+title('Eingangsstrom ie(t)')
+ylabel('ie(t) [A]')
+xlabel('t [s]')
+grid on
 
-equ = diff(ue(t),t) == R*diff(ie(t),t) + L*diff(ie(t),t,2) + 1/C*ie(t);
-Die(t) = diff(ie(t),t);
-cond = [ie(0) == firstInitialValue, Die(0) == secondInitialValue];
+subplot(2,1,2)
+fplot(ue, range)
+title('Eingangsspannung ue(t)')
+ylabel('ue(t) [V]')
+xlabel('t [s]')
+grid on
 
-% ie(t) = dsolve('Due = Die * R + L * D2ie + 1/C * ie','ie(0)=0','Die(0)=0','t');
+% Berechnungen der Spannungen aller passiver Bauelemente
+uR(t) = R*ie;
+uL(t) = L*diff(ie,t);
+uC(t) = 1/C * int(ie(tau), tau, 0, t);
 
+% Ploten der Spannungen aller passiver Bauelemente
 figure(2)
-fplot(@(t)ie(t), range, 'g')
-grid on;
-title 'ie(t)'
+subplot(2,2,1)
+fplot(uR, range)
+title('Widerstandsspannung uR(t)')
+ylabel('uR(t) [V]')
+xlabel('t [s]')
+grid on
 
-uR(t) = ie(t)*R;
-uL(t) = L*diff(ie(t),t);
-uC(t) = 1/C*int(ie(tau),tau,0,t);
+subplot(2,2,2)
+fplot(uL, range)
+title('Induktivitätsspannung uL(t)')
+ylabel('uL(t) [V]')
+xlabel('t [s]')
+grid on
 
-figure(3)
-fplot(@(t)uR(t),range)
-grid on;
-title 'UR(t)'
-figure(4)
-fplot(@(t)uL(t),range)
-grid on;
-title 'UL(t)'
-figure(5)
-fplot(@(t)uC(t),range)
-grid on;
-title 'UC(t)'
+subplot(2,2,[3 4])
+fplot(uC, range)
+title('Kapazitätsspannung uC(t)')
+ylabel('uC(t) [V]')
+xlabel('t [s]')
+grid on
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
