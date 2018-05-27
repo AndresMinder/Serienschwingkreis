@@ -5,14 +5,14 @@ clear all; close all; clc
 % Festlegungen
 syms s t tau ue(t) ie(t)
 
-% Vom User zu bestimmende Gr�ssen
-ue(t) = 10;
+% Vom User zu bestimmende Groessen
+ue(t) = 100;
 range = [0, 0.1];
 R = 20;
 L = 0.1;
 C = 20e-6;
 
-% Berechnungen der Eingangsgr�ssen
+% Berechnungen der Eingangsgroessen
 % Der Eingangsstrom wurde mittels der
 % Laplace-Transformierten der Differentialgleichung der Eingangsmasche.
 % Dabei sind alle Anfangswerte gleich Null gesetzt.
@@ -20,7 +20,20 @@ Ue(s) = laplace(ue);
 Ie(s) = (s*Ue(s)*1/L)/(s^2+R/L*s+1/(C*L));
 ie(t) = ilaplace(Ie);
 
-% Plot der Eingangsgr�ssen
+% =========================================================================
+% de Teil klappt nit
+% 
+% equ = diff(ue, t) == L*diff(ie, t, 2) + R*diff(ie, t) + 1/C*ie;
+% Die(t) = diff(ie, t);
+% condition1 = ie(0) == sym('0');
+% condition2 = Die(0) == sym('0');
+% condition = [condition1, condition2];
+% 
+% ie(t) = dsolve(equ, condition);
+% % ie
+% =========================================================================
+
+% Plot der Eingangsgroessen
 figure(1)
 subplot(2,1,1)
 fplot(ie, range)
@@ -52,14 +65,14 @@ grid on
 
 subplot(2,2,2)
 fplot(uL, range)
-title('Induktivit�tsspannung uL(t)')
+title('Induktivitaetsspannung uL(t)')
 ylabel('uL(t) [V]')
 xlabel('t [s]')
 grid on
 
 subplot(2,2,[3 4])
 fplot(uC, range)
-title('Kapazit�tsspannung uC(t)')
+title('Kapazitaetsspannung uC(t)')
 ylabel('uC(t) [V]')
 xlabel('t [s]')
 grid on
