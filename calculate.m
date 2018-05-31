@@ -40,28 +40,14 @@ L = 0.1;
 C = 20e-6;
 
 switch (component)
-    case 'current'
-        % Berechnungen der Eingangsgroessen
-        % Der Eingangsstrom wurde mittels der
-        % Laplace-Transformierten der Differentialgleichung der Eingangs-
-        % masche.
-        % Dabei sind alle Anfangswerte gleich Null gesetzt.
-        % =================================================================
-        % de Teil klappt nit
-        % 
-        % equ = diff(ue, t) == L*diff(ie, t, 2) + R*diff(ie, t) + 1/C*ie;
-        % Die(t) = diff(ie, t);
-        % condition1 = ie(0) == sym('0');
-        % condition2 = Die(0) == sym('0');
-        % condition = [condition1, condition2];
-        % 
-        % ie(t) = dsolve(equ, condition);
-        % % ie
-        % =================================================================
+    case 'current'        
+        equ = diff(inputValue, t) == L*diff(output, t, 2) + R*diff(output, t) + 1/C*output;
+        Doutput(t) = diff(output, t);
+        condition1 = output(0) == sym('0');
+        condition2 = Doutput(0) == sym('0');
+        condition = [condition1, condition2];
         
-        Ue(s) = laplace(inputValue);
-        Ie(s) = (s*Ue(s)*1/L)/(s^2+R/L*s+1/(C*L));
-        output(t) = ilaplace(Ie);
+        output(t) = dsolve(equ, condition);
         
     case 'resistance'
         output(t) = R*inputValue;

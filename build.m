@@ -5,20 +5,19 @@ clear all; close all; clc
 % Festlegungen
 syms s t ue(t) ie(t)
 
+% Vom User zu bestimmende Groessen
+ue(t) = 10*heaviside(t-1e-30);
+range = [0, 0.1];
 R = 20;
 L = 0.1;
 C = 20e-6;
 
-% Vom User zu bestimmende Groessen
-ue(t) = 100;
-range = [0, 0.1];
 
+% Berechnungen
 ie(t) = calculate('current',ue);
+uR(t) = calculate('resistance',ie);
+uL(t) = calculate('inductor',ie);
+uC(t) = calculate('capacitor',ie);
 
-% Berechnungen der Spannungen aller passiver Bauelemente
-uR = calculate('resistance',ie);
-uL = calculate('inductor',ie);
-uC = calculate('capacitor',ie);
-
-% Plot aller Grössen
+% Ploten aller Grössen
 fplotValues(ie,ue,uR,uL,uC,range);
