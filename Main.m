@@ -4,7 +4,7 @@
 % Dateiname    : Main.m
 % Beginndatum  : 15.04.2018
 % Enddatum     : -
-% Version      : 1.0
+% Version      : 1.3
 % *************************************************************************
 % Das main.m file dient als Startsequenz des ganzen Projektes 
 % "Serienschwingkreis". Es startet in einer Funktion das Graphical User
@@ -29,18 +29,30 @@
 clear all; close all; clc
 syms s t ue(t) ie(t)
 
-% Vom User zu bestimmende Groessen
-ue(t) = 10*heaviside(t-1e-30);
-range = [0, 0.1];
-R = 20;
-L = 0.1;
-C = 20e-6;
-
-% Berechnungen
-ie(t) = simplify(calculate('current',ue));
-uR(t) = (calculate('resistance',ie));
-uL(t) = (calculate('inductor',ie));
-uC(t) = (calculate('capacitor',ie));
-
-% Ploten aller Grössen
-fplotValues(ie,ue,uR,uL,uC,range);
+while 1
+    values = Hauptmenu();
+    % Überprüfung ob das Fenster einfach nur geschlossen wurde
+    try
+        if values == 0
+            break;
+        end
+    catch
+        ue(t) = values.InputVoltage;
+        ie(t) = simplify(calculate('current',values.InputVoltage, values.Resistance, values.Inductor, values.Capacitor));
+        uR(t) = calculate('resistance',ie, values.Resistance);
+        uL(t) = calculate('inductor',ie, values.Inductor);
+        uC(t) = calculate('capacitor',ie, values.Capacitor);
+        
+        fplotValues(ie,ue,uR,uL,uC,[0 0.1]);
+    end
+    
+    answer = questdlg('Möchten Sie noch eine weitere Funktion Ploten?', 'Frage', 'Ja', 'Nein', 'Ja');
+    switch answer
+        case 'Ja'
+            continue;
+        case 'Nein'
+            break;
+        otherwise
+            % do nothing;
+    end
+end

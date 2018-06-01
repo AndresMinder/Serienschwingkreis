@@ -36,7 +36,7 @@
 
 function [] = fplotValues(inputCurrent ,inputVoltage, resistanceVoltage, inductanceVoltage, capacitanceVoltage, plotRange)
 
-figure(1)
+figure
 subplot(2,1,1)
 fplot(inputCurrent, plotRange)
 title('Eingangsstrom ie(t)')
@@ -51,7 +51,7 @@ ylabel('ue(t) [V]')
 xlabel('t [s]')
 grid on
 
-figure(2)
+figure
 subplot(2,2,1)
 fplot(resistanceVoltage, plotRange)
 title('Widerstandsspannung uR(t)')
