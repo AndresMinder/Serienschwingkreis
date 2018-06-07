@@ -1,1 +1,1 @@
-Main();
+Hauptmenu();

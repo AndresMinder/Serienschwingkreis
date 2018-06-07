@@ -1,75 +1,51 @@
-% *************************************************************************
-% Projekt      : Serienschwingkreis
-% Autor        : Nando Spiegel, Andres Minder
-% Dateiname    : fplotValues.m
-% Beginndatum  : 30.05.04.2018
-% Enddatum     : -
-% Version      : 1.1
-% *************************************************************************
-% Plotet alle Grössen in zwei verschiedenen Fenstern und beschriftet sie. 
-% Aufgeteilt in die Eingangsgrössen ie(t) und ue(t) des Serienschwing-
-% kreises.
-% *************************************************************************
-% 
-% input variables:  - inputCurrent       : datatype "1x1 symfun"
-%                   - inputVoltage       : datatype "1x1 symfun"
-%                   - resistanceVoltage  : datatype "1x1 symfun"
-%                   - inductanceVoltage  : datatype "1x1 symfun"
-%                   - capacitanceVoltage : datatype "1x1 symfun"
-%                   - plotRange          : datatype "1x2 double"
-
-% output variables: - 
-% *************************************************************************
-%
-% used functions:   - figure()
-%                   - subplot()
-%                   - fplot()
-%                   - title()
-%                   - ylabel()
-%                   - xlabel()
-% 
-% input files:      -
-% 
-% output files:     -
-% 
-% *************************************************************************
-
-function [] = fplotValues(inputCurrent ,inputVoltage, resistanceVoltage, inductanceVoltage, capacitanceVoltage, plotRange)
-
-figure
-subplot(2,1,1)
-fplot(inputCurrent, plotRange)
-title('Eingangsstrom ie(t)')
-ylabel('ie(t) [A]')
-xlabel('t [s]')
-grid on
-
-subplot(2,1,2)
-fplot(inputVoltage, plotRange)
-title('Eingangsspannung ue(t)')
-ylabel('ue(t) [V]')
-xlabel('t [s]')
-grid on
-
-figure
-subplot(2,2,1)
-fplot(resistanceVoltage, plotRange)
-title('Widerstandsspannung uR(t)')
-ylabel('uR(t) [V]')
-xlabel('t [s]')
-grid on
-
-subplot(2,2,2)
-fplot(inductanceVoltage, plotRange)
-title('Induktivitätsspannung uL(t)')
-ylabel('uL(t) [V]')
-xlabel('t [s]')
-grid on
-
-subplot(2,2,[3 4])
-fplot(capacitanceVoltage, plotRange)
-title('Kapazitätsspannung uC(t)')
-ylabel('uC(t) [V]')
-xlabel('t [s]')
-grid on
+function [] = fplotValues(plotelement ,inputValue, plotRange, R, L, C)
+switch plotelement
+    case 'inputCurrent'
+        figure
+        fplot(inputValue, plotRange)
+        title('Eingangsstrom ie(t)')
+        ylabel('ie(t) [A]')
+        xlabel('t [s]')
+        lgd = legend(['ie(t); R=' num2str(R) '; L=' num2str(L) '; C=' num2str(C)]);
+        title(lgd,'Values');
+        grid on
+    case 'inputVoltage'
+        figure
+        fplot(inputValue, plotRange)
+        title('Eingangsspannung ue(t)')
+        ylabel('ue(t) [V]')
+        xlabel('t [s]')
+        lgd = legend(['ue(t); R=' num2str(R) '; L=' num2str(L) '; C=' num2str(C)]);
+        title(lgd,'Values');
+        grid on
+    case 'resistanceVoltage'
+        figure
+        fplot(inputValue, plotRange)
+        title('Widerstandsspannung uR(t)')
+        ylabel('uR(t) [V]')
+        xlabel('t [s]')
+        lgd = legend(['uR(t); R=' num2str(R) '; L=' num2str(L) '; C=' num2str(C)]);
+        title(lgd,'Values');
+        grid on
+    case 'inductanceVoltage'
+        figure
+        fplot(inputValue, plotRange)
+        title('Induktivitätsspannung uL(t)')
+        ylabel('uL(t) [V]')
+        xlabel('t [s]')
+        lgd = legend(['uL(t); R=' num2str(R) '; L=' num2str(L) '; C=' num2str(C)]);
+        title(lgd,'Values');
+        grid on
+    case 'capacitanceVoltage'
+        figure
+        fplot(inputValue, plotRange)
+        title('Kapazitätsspannung uC(t)')
+        ylabel('uC(t) [V]')
+        xlabel('t [s]')
+        lgd = legend(['uC(t); R=' num2str(R) '; L=' num2str(L) '; C=' num2str(C)]);
+        title(lgd,'Values');
+        grid on
+    otherwise
+        % do nothing
+end
 end
